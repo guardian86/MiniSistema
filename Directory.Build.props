@@ -1,0 +1,21 @@
+<Project>
+  <PropertyGroup>
+    <!-- Análisis de código -->
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+
+    <!-- Build reproducible y estrictos básicos -->
+    <Deterministic>true</Deterministic>
+    <ContinuousIntegrationBuild Condition=" '$(CI)' != '' ">true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+
+  <!-- Excluir carpetas comunes de análisis/package -->
+  <ItemGroup>
+    <Compile Remove="**/bin/**;**/obj/**" />
+    <EmbeddedResource Remove="**/bin/**;**/obj/**" />
+    <None Remove="**/bin/**;**/obj/**" />
+  </ItemGroup>
+</Project>

@@ -1,4 +1,4 @@
-namespace MiniSistema.Server
+namespace MiniSistema.Api
 {
     public class WeatherForecast
     {

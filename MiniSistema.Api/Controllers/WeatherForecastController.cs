@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace MiniSistema.Server.Controllers
+namespace MiniSistema.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]

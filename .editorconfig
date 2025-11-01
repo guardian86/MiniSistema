@@ -1,0 +1,57 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = crlf
+insert_final_newline = true
+indent_style = space
+indent_size = 4
+trim_trailing_whitespace = true
+
+# Reglas generales C#
+[*.cs]
+dotnet_style_qualification_for_field = false:suggestion
+dotnet_style_qualification_for_property = false:suggestion
+dotnet_style_qualification_for_method = false:suggestion
+dotnet_style_qualification_for_event = false:suggestion
+
+dotnet_style_require_accessibility_modifiers = always:suggestion
+csharp_prefer_braces = true:warning
+csharp_new_line_before_open_brace = all
+csharp_prefer_switch_expression = true:suggestion
+
+# Uso de var
+csharp_style_var_for_built_in_types = true:suggestion
+csharp_style_var_when_type_is_apparent = true:suggestion
+csharp_style_var_elsewhere = true:suggestion
+
+# Expresiones y patrones
+csharp_style_pattern_local_over_anonymous_function = true:suggestion
+csharp_style_prefer_pattern_matching = true:suggestion
+csharp_style_prefer_range_operator = true:suggestion
+csharp_style_prefer_tuple_swap = true:suggestion
+
+# Expresiones de cuerpo de miembros
+csharp_style_expression_bodied_methods = when_on_single_line:suggestion
+csharp_style_expression_bodied_properties = when_on_single_line:suggestion
+csharp_style_expression_bodied_accessors = when_on_single_line:suggestion
+
+# Nulos y null-coalescing
+csharp_style_throw_expression = true:suggestion
+csharp_style_conditional_delegate_call = true:suggestion
+
+# Nivel de gravedad de sugerencias a warnings para mayor visibilidad
+severity = warning
+
+# Nombres (alineado con prácticas generales)
+dotnet_naming_rule.private_members_should_be_camel_case.severity = suggestion
+dotnet_naming_rule.private_members_should_be_camel_case.symbols = private_members
+dotnet_naming_rule.private_members_should_be_camel_case.style = camel_case
+
+dotnet_naming_symbols.private_members.applicable_kinds = field,property,method
+
+dotnet_naming_style.camel_case.capitalization = camel_case
+
+# Archivos generados
+[*.g.cs]
+generated_code = true
