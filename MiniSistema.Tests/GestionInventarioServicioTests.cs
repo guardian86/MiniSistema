@@ -15,6 +15,7 @@ public class GestionInventarioServicioTests
             [1] = new Producto { Id = 1, Nombre = "Lapicero", Cantidad = 10 },
             [2] = new Producto { Id = 2, Nombre = "Cuaderno", Cantidad = 5 }
         };
+        private int _nextId = 3;
 
         public Task ActualizarAsync(Producto producto)
         {
@@ -28,8 +29,21 @@ public class GestionInventarioServicioTests
             return Task.FromResult<Producto?>(p);
         }
 
+        public Task<Producto?> ObtenerPorNombreAsync(string nombre)
+        {
+            var p = _db.Values.FirstOrDefault(x => string.Equals(x.Nombre, nombre, StringComparison.OrdinalIgnoreCase));
+            return Task.FromResult<Producto?>(p);
+        }
+
         public Task<IEnumerable<Producto>> ObtenerTodosAsync()
             => Task.FromResult<IEnumerable<Producto>>(_db.Values.ToList());
+
+        public Task<Producto> CrearAsync(Producto producto)
+        {
+            producto.Id = _nextId++;
+            _db[producto.Id] = producto;
+            return Task.FromResult(producto);
+        }
     }
 
     [Fact]

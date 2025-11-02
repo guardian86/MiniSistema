@@ -19,4 +19,9 @@ public interface IGestionInventarioServicio
     /// <param name="request">Datos del movimiento a registrar.</param>
     /// <returns>Producto actualizado en formato DTO.</returns>
     Task<ProductoDto> RegistrarMovimientoAsync(MovimientoRequestDto request);
+
+    /// <summary>
+    /// Registra un movimiento referenciando el producto por nombre. Si no existe y la cantidad es positiva, lo crea.
+    /// </summary>
+    Task<ProductoDto> RegistrarMovimientosAsync(MovimientoCrearRequestDto request);
 }

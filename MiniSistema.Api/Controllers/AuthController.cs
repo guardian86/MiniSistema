@@ -6,7 +6,7 @@ using MiniSistema.Application.Servicios;
 namespace MiniSistema.Api.Controllers;
 
 [ApiController]
-[Route("auth")]
+[Route("api/auth")]
 public class AuthController : ControllerBase
 {
     private readonly IAutenticacionServicio _autenticacionServicio;

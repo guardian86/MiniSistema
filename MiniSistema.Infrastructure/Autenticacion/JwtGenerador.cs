@@ -21,10 +21,10 @@ public sealed class JwtGenerador : IJwtGenerador
 
     public string GenerarToken(string username)
     {
-        string issuer = _configuration["Jwt:Issuer"] ?? "MiniSistema";
-        string audience = _configuration["Jwt:Audience"] ?? issuer;
-        string key = _configuration["Jwt:Key"] ?? throw new InvalidOperationException("Clave JWT no configurada (Jwt:Key)");
-        int minutes = int.TryParse(_configuration["Jwt:ExpirationMinutes"], out int m) ? m : 60;
+    string emisor = _configuration["JwtConfig:Issuer"]!;
+    string audiencia = _configuration["JwtConfig:Audience"]!;
+    string key = _configuration["JwtConfig:Key"] ?? throw new InvalidOperationException("Clave JWT no configurada (JwtConfig:Key)");
+    int minutos = int.TryParse(_configuration["JwtConfig:ExpirationMinutes"], out int m) ? m : 60;
 
         var claims = new List<Claim>
         {
@@ -32,14 +32,14 @@ public sealed class JwtGenerador : IJwtGenerador
             new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N"))
         };
 
-        var credentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)), SecurityAlgorithms.HmacSha256);
+        var credenciales = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)), SecurityAlgorithms.HmacSha256);
 
         var token = new JwtSecurityToken(
-            issuer: issuer,
-            audience: audience,
+            issuer: emisor,
+            audience: audiencia,
             claims: claims,
-            expires: DateTime.UtcNow.AddMinutes(minutes),
-            signingCredentials: credentials
+            expires: DateTime.UtcNow.AddMinutes(minutos),
+            signingCredentials: credenciales
         );
 
         return new JwtSecurityTokenHandler().WriteToken(token);

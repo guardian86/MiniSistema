@@ -6,33 +6,22 @@ using Microsoft.OpenApi.Models;
 using MiniSistema.Application.Interfaces;
 using MiniSistema.Application.Servicios;
 using MiniSistema.Domain.Interfaces;
-using MiniSistema.Infrastructure.Autenticacion;
 using MiniSistema.Infrastructure.Persistencia;
-using MiniSistema.Infrastructure.Repositorios;
+using MiniSistema.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 1) Infraestructura: DbContext (PostgreSQL)
-string conexion = builder.Configuration.GetConnectionString("ConexionPostgres")
-               ?? builder.Configuration["ConexionPostgres"]
-               ?? "Host=localhost;Port=5432;Database=minisistema;Username=postgres;Password=postgres";
-
-builder.Services.AddDbContext<MiniSistemaDbContext>(options =>
-    options.UseNpgsql(conexion));
-
-// 2) Repositorios e infraestructura
-builder.Services.AddScoped<IProductoRepositorio, ProductoRepositorio>();
-builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorioEnMemoria>();
-builder.Services.AddSingleton<IJwtGenerador, JwtGenerador>();
+// 1) Infraestructura (DbContext, repositorios, generador JWT)
+builder.Services.AddInfraestructuraServices(builder.Configuration);
 
 // 3) Servicios de aplicación
 builder.Services.AddScoped<IGestionInventarioServicio, GestionInventarioServicio>();
 builder.Services.AddScoped<IAutenticacionServicio, AutenticacionServicio>();
 
 // 4) Autenticación y autorización JWT
-string jwtKey = builder.Configuration["Jwt:Key"] ?? "21864ea4-ab1f-4141-ac67-d3a69e720497";
-string issuer = builder.Configuration["Jwt:Issuer"] ?? "MiniSistema";
-string audience = builder.Configuration["Jwt:Audience"] ?? issuer;
+string jwtKey = builder.Configuration["JwtConfig:Key"]!;
+string issuer = builder.Configuration["JwtConfig:Issuer"]!;
+string audience = builder.Configuration["JwtConfig:Audience"]!;
 
 builder.Services
     .AddAuthentication(options =>
@@ -56,7 +45,13 @@ builder.Services
         };
     });
 
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorization(options =>
+{
+    // Requiere autenticación por defecto en todos los endpoints (salvo [AllowAnonymous])
+    options.FallbackPolicy = new Microsoft.AspNetCore.Authorization.AuthorizationPolicyBuilder()
+        .RequireAuthenticatedUser()
+        .Build();
+});
 
 // 5) Controladores y Swagger con soporte Bearer
 builder.Services.AddControllers();

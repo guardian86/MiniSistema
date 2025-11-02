@@ -3,10 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using MiniSistema.Application.Dtos;
 using MiniSistema.Application.Servicios;
 
+
 namespace MiniSistema.Api.Controllers;
 
 [ApiController]
-[Route("productos")]
+[Route("api/productos")]
 [Authorize]
 public class ProductosController : ControllerBase
 {
@@ -27,12 +28,18 @@ public class ProductosController : ControllerBase
 
     [HttpPost("movimiento")]
     [ProducesResponseType(typeof(ProductoDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> RegistrarMovimiento([FromBody] MovimientoRequestDto request)
+    public async Task<IActionResult> RegistrarMovimiento([FromBody] MovimientoCrearRequestDto request)
     {
+        if (request is null || string.IsNullOrWhiteSpace(request.Nombre))
+        {
+            return BadRequest(new { error = "El nombre del producto es obligatorio." });
+        }
+
         try
         {
-            var result = await _gestionInventario.RegistrarMovimientoAsync(request);
+            var result = await _gestionInventario.RegistrarMovimientosAsync(request);
             return Ok(result);
         }
         catch (KeyNotFoundException ex)
@@ -40,4 +47,6 @@ public class ProductosController : ControllerBase
             return NotFound(new { error = ex.Message });
         }
     }
+
+    
 }

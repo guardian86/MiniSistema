@@ -41,6 +41,37 @@ public sealed class GestionInventarioServicio : IGestionInventarioServicio
         return MapearADto(producto);
     }
 
+    /// <inheritdoc />
+    public async Task<ProductoDto> RegistrarMovimientosAsync(MovimientoCrearRequestDto request)
+    {
+        if (request is null || string.IsNullOrWhiteSpace(request.Nombre))
+        {
+            throw new ArgumentException("El nombre es obligatorio.", nameof(request));
+        }
+
+        Producto? producto = await _productoRepositorio.ObtenerPorNombreAsync(request.Nombre).ConfigureAwait(false);
+
+        if (producto is null)
+        {
+            if (request.Cantidad <= 0)
+            {
+                throw new KeyNotFoundException($"Producto con nombre '{request.Nombre}' no encontrado para salida/ajuste negativo.");
+            }
+
+            producto = new Producto { Nombre = request.Nombre, Cantidad = request.Cantidad };
+            producto = await _productoRepositorio.CrearAsync(producto).ConfigureAwait(false);
+            return MapearADto(producto);
+        }
+
+        checked
+        {
+            producto.Cantidad += request.Cantidad;
+        }
+
+        await _productoRepositorio.ActualizarAsync(producto).ConfigureAwait(false);
+        return MapearADto(producto);
+    }
+
     private static ProductoDto MapearADto(Producto p)
         => new(p.Id, p.Nombre, p.Cantidad);
 }

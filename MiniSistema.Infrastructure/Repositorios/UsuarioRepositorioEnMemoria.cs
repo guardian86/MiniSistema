@@ -13,9 +13,8 @@ public sealed class UsuarioRepositorioEnMemoria : IUsuarioRepositorio
 
     public UsuarioRepositorioEnMemoria(IConfiguration configuration)
     {
-        // Lee credenciales desde configuración (appsettings: Autenticacion:Usuario/Password)
-        _user = configuration["Autenticacion:Usuario"] ?? "admin";
-        _pass = configuration["Autenticacion:Password"] ?? "1234";
+        _user = configuration["Autenticacion:Usuario"]!;
+        _pass = configuration["Autenticacion:Password"]!;
     }
 
     public Task<bool> ValidarCredencialesAsync(string username, string password)
