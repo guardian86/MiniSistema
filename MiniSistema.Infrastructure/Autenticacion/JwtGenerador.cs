@@ -21,10 +21,10 @@ public sealed class JwtGenerador : IJwtGenerador
 
     public string GenerarToken(string username)
     {
-        var issuer = _configuration["Jwt:Issuer"] ?? "MiniSistema";
-        var audience = _configuration["Jwt:Audience"] ?? issuer;
-        var key = _configuration["Jwt:Key"] ?? throw new InvalidOperationException("Clave JWT no configurada (Jwt:Key)");
-        var minutes = int.TryParse(_configuration["Jwt:ExpirationMinutes"], out var m) ? m : 60;
+        string issuer = _configuration["Jwt:Issuer"] ?? "MiniSistema";
+        string audience = _configuration["Jwt:Audience"] ?? issuer;
+        string key = _configuration["Jwt:Key"] ?? throw new InvalidOperationException("Clave JWT no configurada (Jwt:Key)");
+        int minutes = int.TryParse(_configuration["Jwt:ExpirationMinutes"], out int m) ? m : 60;
 
         var claims = new List<Claim>
         {

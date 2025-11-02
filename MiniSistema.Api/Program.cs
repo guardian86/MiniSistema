@@ -12,9 +12,6 @@ using MiniSistema.Infrastructure.Repositorios;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configuración de Kestrel: puertos fijos
-builder.WebHost.UseUrls("https://localhost:5001", "http://localhost:5000");
-
 // 1) Infraestructura: DbContext (PostgreSQL)
 string conexion = builder.Configuration.GetConnectionString("ConexionPostgres")
                ?? builder.Configuration["ConexionPostgres"]
@@ -33,7 +30,7 @@ builder.Services.AddScoped<IGestionInventarioServicio, GestionInventarioServicio
 builder.Services.AddScoped<IAutenticacionServicio, AutenticacionServicio>();
 
 // 4) Autenticación y autorización JWT
-string jwtKey = builder.Configuration["Jwt:Key"] ?? "EstaEsUnaClaveSuperSecreta_de_ejemplo_para_MiniSistema_2025";
+string jwtKey = builder.Configuration["Jwt:Key"] ?? "21864ea4-ab1f-4141-ac67-d3a69e720497";
 string issuer = builder.Configuration["Jwt:Issuer"] ?? "MiniSistema";
 string audience = builder.Configuration["Jwt:Audience"] ?? issuer;
 
@@ -109,17 +106,13 @@ using (var scope = app.Services.CreateScope())
     await InicializadorDeDatos.InicializarAsync(db);
 }
 
-// Configure the HTTP request pipeline
-if (app.Environment.IsDevelopment())
+// Configure Swagger UI accesible en la raíz
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    // Middleware y pipeline
-    app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "MiniSistema API v1");
-        c.RoutePrefix = "swagger";
-    });
-}
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "MiniSistema API v1");
+    c.RoutePrefix = string.Empty;
+});
 
 app.UseCors("PoliticaCors");
 
@@ -130,4 +123,4 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+await app.RunAsync();
