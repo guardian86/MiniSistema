@@ -19,6 +19,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MiniSistema.Application\MiniSistema.Application.csproj" />
+    <ProjectReference Include="..\MiniSistema.Domain\MiniSistema.Domain.csproj" />
+    <ProjectReference Include="..\MiniSistema.Infrastructure\MiniSistema.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
