@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniSistema.Infrastructure"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniSistema.Api", "MiniSistema.Api\MiniSistema.Api.csproj", "{B773ACD2-D605-414A-A199-2EBFD3FF9169}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniSistema.Tests", "MiniSistema.Tests\MiniSistema.Tests.csproj", "{C7B02568-2C75-4C16-A89B-FD85A98F3C51}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,8 +71,23 @@ Global
 		{B773ACD2-D605-414A-A199-2EBFD3FF9169}.Release|x64.Build.0 = Release|Any CPU
 		{B773ACD2-D605-414A-A199-2EBFD3FF9169}.Release|x86.ActiveCfg = Release|Any CPU
 		{B773ACD2-D605-414A-A199-2EBFD3FF9169}.Release|x86.Build.0 = Release|Any CPU
+		{C7B02568-2C75-4C16-A89B-FD85A98F3C51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7B02568-2C75-4C16-A89B-FD85A98F3C51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7B02568-2C75-4C16-A89B-FD85A98F3C51}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C7B02568-2C75-4C16-A89B-FD85A98F3C51}.Debug|x64.Build.0 = Debug|Any CPU
+		{C7B02568-2C75-4C16-A89B-FD85A98F3C51}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C7B02568-2C75-4C16-A89B-FD85A98F3C51}.Debug|x86.Build.0 = Debug|Any CPU
+		{C7B02568-2C75-4C16-A89B-FD85A98F3C51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7B02568-2C75-4C16-A89B-FD85A98F3C51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7B02568-2C75-4C16-A89B-FD85A98F3C51}.Release|x64.ActiveCfg = Release|Any CPU
+		{C7B02568-2C75-4C16-A89B-FD85A98F3C51}.Release|x64.Build.0 = Release|Any CPU
+		{C7B02568-2C75-4C16-A89B-FD85A98F3C51}.Release|x86.ActiveCfg = Release|Any CPU
+		{C7B02568-2C75-4C16-A89B-FD85A98F3C51}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B8CC35E0-4B91-452F-B14B-DFB61E05F503}
 	EndGlobalSection
 EndGlobal
