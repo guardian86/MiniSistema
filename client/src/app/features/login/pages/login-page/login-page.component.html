@@ -1,0 +1,23 @@
+<div class="login-contenedor">
+  <mat-card appearance="outlined">
+    <h2>Iniciar sesión</h2>
+    <mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
+    <form [formGroup]="loginFormulario" (ngSubmit)="onSubmit()" novalidate>
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Usuario</mat-label>
+        <input matInput placeholder="Usuario" formControlName="username" />
+        <mat-error *ngIf="loginFormulario.controls.username.touched && loginFormulario.controls.username.hasError('required')">
+          El usuario es obligatorio
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Contraseña</mat-label>
+        <input matInput type="password" placeholder="Contraseña" formControlName="password" />
+        <mat-error *ngIf="loginFormulario.controls.password.touched && loginFormulario.controls.password.hasError('required')">
+          La contraseña es obligatoria
+        </mat-error>
+      </mat-form-field>
+      <button mat-flat-button color="primary" type="submit" [disabled]="loginFormulario.invalid || cargando">Entrar</button>
+    </form>
+  </mat-card>
+</div>

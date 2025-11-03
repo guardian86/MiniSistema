@@ -1,0 +1,67 @@
+{
+	"info": {
+		"_postman_id": "fa1ef491-8271-4740-a589-6648715bb73e",
+		"name": "MiniSistema",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "1275017"
+	},
+	"item": [
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"admin\",\r\n  \"password\": \"1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://localhost:5001/api/auth/login"
+			},
+			"response": []
+		},
+		{
+			"name": "inventario",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImp0aSI6IjE3MmUxNDZkMTY5ODQzYmU5NzA5ZWI5MzM3MTY1NGMzIiwiZXhwIjoxNzYyMTg2ODE1LCJpc3MiOiJNaW5pU2lzdGVtYSIsImF1ZCI6Ik1pbmlTaXN0ZW1hIn0.AoVZ4Up8pzNL0yma5Lj_gHHHc-N7jCvXRCPvm4xXKFM"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "https://localhost:5001/api/productos/inventario"
+			},
+			"response": []
+		},
+		{
+			"name": "movimiento",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImp0aSI6IjE3MmUxNDZkMTY5ODQzYmU5NzA5ZWI5MzM3MTY1NGMzIiwiZXhwIjoxNzYyMTg2ODE1LCJpc3MiOiJNaW5pU2lzdGVtYSIsImF1ZCI6Ik1pbmlTaXN0ZW1hIn0.AoVZ4Up8pzNL0yma5Lj_gHHHc-N7jCvXRCPvm4xXKFM"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\": \"Azucar\",\r\n  \"cantidad\": 20\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://localhost:5001/api/productos/movimiento"
+			},
+			"response": []
+		}
+	]
+}
