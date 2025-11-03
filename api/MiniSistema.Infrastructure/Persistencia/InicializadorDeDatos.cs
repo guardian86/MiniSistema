@@ -9,7 +9,7 @@ public static class InicializadorDeDatos
 {
     public static async Task InicializarAsync(MiniSistemaDbContext db)
     {
-        await db.Database.EnsureCreatedAsync().ConfigureAwait(false);
+        await db.Database.EnsureCreatedAsync();
 
         if (!db.Productos.Any())
         {
@@ -17,7 +17,7 @@ public static class InicializadorDeDatos
                 new Producto { Nombre = "Lapicero", Cantidad = 10 },
                 new Producto { Nombre = "Cuaderno", Cantidad = 5 }
             );
-            await db.SaveChangesAsync().ConfigureAwait(false);
+            await db.SaveChangesAsync();
         }
     }
 }

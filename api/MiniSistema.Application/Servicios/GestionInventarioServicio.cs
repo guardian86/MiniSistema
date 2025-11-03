@@ -19,14 +19,14 @@ public sealed class GestionInventarioServicio : IGestionInventarioServicio
     /// <inheritdoc />
     public async Task<IEnumerable<ProductoDto>> ConsultarInventarioAsync()
     {
-        IEnumerable<Producto> productos = await _productoRepositorio.ObtenerTodosAsync().ConfigureAwait(false);
+        IEnumerable<Producto> productos = await _productoRepositorio.ObtenerTodosAsync();
         return productos.Select(MapearADto);
     }
 
     /// <inheritdoc />
     public async Task<ProductoDto> RegistrarMovimientoAsync(MovimientoRequestDto request)
     {
-        Producto? producto = await _productoRepositorio.ObtenerPorIdAsync(request.ProductoId).ConfigureAwait(false);
+        Producto? producto = await _productoRepositorio.ObtenerPorIdAsync(request.ProductoId);
         if (producto is null)
         {
             throw new KeyNotFoundException($"Producto con Id {request.ProductoId} no encontrado.");
@@ -49,7 +49,7 @@ public sealed class GestionInventarioServicio : IGestionInventarioServicio
             throw new ArgumentException("El nombre es obligatorio.", nameof(request));
         }
 
-        Producto? producto = await _productoRepositorio.ObtenerPorNombreAsync(request.Nombre).ConfigureAwait(false);
+        Producto? producto = await _productoRepositorio.ObtenerPorNombreAsync(request.Nombre);
 
         if (producto is null)
         {
@@ -59,7 +59,7 @@ public sealed class GestionInventarioServicio : IGestionInventarioServicio
             }
 
             producto = new Producto { Nombre = request.Nombre, Cantidad = request.Cantidad };
-            producto = await _productoRepositorio.CrearAsync(producto).ConfigureAwait(false);
+            producto = await _productoRepositorio.CrearAsync(producto);
             return MapearADto(producto);
         }
 
@@ -68,7 +68,7 @@ public sealed class GestionInventarioServicio : IGestionInventarioServicio
             producto.Cantidad += request.Cantidad;
         }
 
-        await _productoRepositorio.ActualizarAsync(producto).ConfigureAwait(false);
+        await _productoRepositorio.ActualizarAsync(producto);
         return MapearADto(producto);
     }
 

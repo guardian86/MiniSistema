@@ -21,7 +21,7 @@ public sealed class AutenticacionServicio : IAutenticacionServicio
     /// <inheritdoc />
     public async Task<LoginResponseDto> LoginAsync(LoginRequestDto request)
     {
-        bool valido = await _usuarioRepositorio.ValidarCredencialesAsync(request.Username, request.Password).ConfigureAwait(false);
+        bool valido = await _usuarioRepositorio.ValidarCredencialesAsync(request.Username, request.Password);
         if (!valido)
         {
             throw new UnauthorizedAccessException("Credenciales inválidas.");

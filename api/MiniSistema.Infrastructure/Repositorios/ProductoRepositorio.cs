@@ -20,7 +20,7 @@ public sealed class ProductoRepositorio : IProductoRepositorio
     public async Task ActualizarAsync(Producto producto)
     {
         _db.Productos.Update(producto);
-        await _db.SaveChangesAsync().ConfigureAwait(false);
+        await _db.SaveChangesAsync();
     }
 
     public Task<Producto?> ObtenerPorIdAsync(int id)
@@ -30,12 +30,12 @@ public sealed class ProductoRepositorio : IProductoRepositorio
         => _db.Productos.AsNoTracking().FirstOrDefaultAsync(p => p.Nombre == nombre);
 
     public async Task<IEnumerable<Producto>> ObtenerTodosAsync()
-        => await _db.Productos.AsNoTracking().OrderBy(p => p.Id).ToListAsync().ConfigureAwait(false);
+        => await _db.Productos.AsNoTracking().OrderBy(p => p.Id).ToListAsync();
 
     public async Task<Producto> CrearAsync(Producto producto)
     {
-        await _db.Productos.AddAsync(producto).ConfigureAwait(false);
-        await _db.SaveChangesAsync().ConfigureAwait(false);
+        await _db.Productos.AddAsync(producto);
+        await _db.SaveChangesAsync();
         return producto;
     }
 }
