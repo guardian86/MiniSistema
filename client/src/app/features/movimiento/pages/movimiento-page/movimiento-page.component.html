@@ -5,13 +5,13 @@
     <form [formGroup]="formulario" (ngSubmit)="onSubmit()" novalidate>
       <mat-form-field appearance="outline" class="w-100">
         <mat-label>Producto</mat-label>
-        <mat-select formControlName="productoId">
-          <mat-option *ngFor="let p of productos" [value]="p.id">{{ p.nombre }} (ID: {{p.id}})</mat-option>
+        <mat-select formControlName="nombre">
+          <mat-option *ngFor="let p of productos" [value]="p.nombre">{{ p.nombre }}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field appearance="outline" class="w-100">
         <mat-label>Cantidad (usar negativo para salida)</mat-label>
-        <input matInput type="number" formControlName="cantidadAjuste" placeholder="Cantidad" />
+        <input matInput type="number" formControlName="cantidad" placeholder="Cantidad" />
       </mat-form-field>
       <div class="acciones">
         <button mat-flat-button color="primary" type="submit" [disabled]="formulario.invalid || cargando">Guardar</button>

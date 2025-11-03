@@ -30,8 +30,8 @@ export class MovimientoPageComponent implements OnInit {
   productos: Producto[] = [];
 
   readonly formulario = this.fb.nonNullable.group({
-    productoId: [0, [Validators.required]],
-    cantidadAjuste: [0, [Validators.required]]
+    nombre: ['', [Validators.required]],
+    cantidad: [0, [Validators.required]]
   });
 
   cargando = false;

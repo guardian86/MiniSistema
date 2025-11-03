@@ -1,5 +1,5 @@
-// DTO para registrar movimiento de producto
+// DTO para registrar movimiento de producto 
 export interface MovimientoRequestDto {
-  productoId: number;
-  cantidadAjuste: number;
+  nombre: string;
+  cantidad: number;
 }
