@@ -1,4 +1,4 @@
-# MiniSistema – API de Inventario (local)
+# MiniSistema – API de Inventario 
 
 Guía rápida para ejecutar en local la API del MiniSistema de Gestión de Inventario.
 
